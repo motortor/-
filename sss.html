@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,user-scalable=no, initial-scale=1.0,maximun-scale=1.0,minimun-scale=1.0">
+  <title>000</title>
+  <meta name="description" content="------------------" />
+  <meta name="keywords" content="">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="./css/reset.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/fullpage.css"> -->
+  <link rel="stylesheet" type="text/css" href="./css/common.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/sss.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./css/index.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./css/game.css"> -->
+  <script src="./js/jquery.min.js"></script>
+  <!-- <script src="./js/fullpage.js"></script> -->
+  <!-- <script src="./js/index.js"></script> -->
+  <!-- <script src="./js/game.js"></script> -->
+  <!-- <script src="./js/gameConfig.js"></script> -->
+  <style>
+    .w {
+      height: 900px;
+    }
+
+    .music_stage {
+      position: absolute;
+      width: 8rem;
+      height: 6rem;
+      /* background-color: aqua; */
+      left: 46%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .music_choice {
+      position: absolute;
+      width: 6rem;
+      height: 6rem;
+      /* background-color: rgb(0, 255, 136); */
+      perspective: 15rem;
+      transform-style: preserve-3d;
+    }
+
+    .difficulty_choice {
+      position: absolute;
+      left: 6rem;
+      width: 2rem;
+      height: 6rem;
+      /* background-color: rgb(247, 0, 255); */
+      perspective: 15rem;
+      perspective-origin: -3rem 3rem;
+      transform-style: preserve-3d;
+    }
+
+    .area_1 {
+      position: absolute;
+      top: 1.75rem;
+      left: .5rem;
+      width: 5rem;
+      height: 2.5rem;
+      background-image: url(./upload/01\ \(3\).jpg);
+      background-size: cover;
+      backface-visibility: hidden;
+      transform-origin: 2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, -60deg);
+      transition: all 1s;
+    }
+
+    /* .area_1:hover {
+      transform: rotate3d(1, 0, 0, -120deg);
+    } */
+
+    .area_1:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    }
+
+    .area_2 {
+      position: absolute;
+      top: 1.75rem;
+      left: .5rem;
+      width: 5rem;
+      height: 2.5rem;
+      background-image: url(./upload/01\ \(2\).jpg);
+      background-size: cover;
+      backface-visibility: hidden;
+      transform-origin: 2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 0deg);
+      transition: all 1s;
+    }
+
+    /* .area_2:hover {
+      transform: rotate3d(1, 0, 0, -60deg);
+    } */
+
+    .area_2:hover {
+      transform: rotate3d(1, 0, 0, 60deg);
+    }
+
+    .area_3 {
+      position: absolute;
+      top: 1.75rem;
+      left: .5rem;
+      width: 5rem;
+      height: 2.5rem;
+      background-image: url(./upload/01\ \(1\).jpg);
+      background-size: cover;
+      backface-visibility: hidden;
+      transform-origin: 2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 60deg);
+      transition: all 1s;
+    }
+
+    /* .area_3:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    } */
+
+    .area_3:hover {
+      transform: rotate3d(1, 0, 0, 120deg);
+    }
+
+    .area_4 {
+      position: absolute;
+      top: 1.75rem;
+      left: -.25rem;
+      width: 2rem;
+      height: 2.5rem;
+      background-color: rgba(193, 252, 76, .5);
+      backface-visibility: hidden;
+      transform-origin: -2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, -60deg);
+      transition: all 1s;
+    }
+
+    .area_4:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    }
+
+    .area_5 {
+      position: absolute;
+      top: 1.75rem;
+      left: -.25rem;
+      width: 2rem;
+      height: 2.5rem;
+      /* background-image: url(./upload/01\ \(1\).jpg);
+      background-size: cover; */
+      /* background-color: cornflowerblue; */
+      backface-visibility: hidden;
+      transform-origin: -2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 0deg);
+      transition: all 1s;
+    }
+
+    .area_5:hover {
+      transform: rotate3d(1, 0, 0, -60deg);
+    }
+
+    /* .area_5:hover {
+      transform: rotate3d(1, 0, 0, 60deg);
+    } */
+
+    .area_6 {
+      position: absolute;
+      top: 1.75rem;
+      left: -.25rem;
+      width: 2rem;
+      height: 2.5rem;
+      /* background-color: rgba(76, 252, 237, 0.5); */
+      backface-visibility: hidden;
+      transform-origin: -2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 60deg);
+      transition: all 1s;
+    }
+
+    /* .area_6:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    } */
+
+    .area_6:hover {
+      transform: rotate3d(1, 0, 0, 120deg);
+    }
+
+    .additional_options {
+      padding: .25rem .5rem .25rem 0;
+
+    }
+
+    .additional_options>li {
+      position: relative;
+      z-index: 3;
+      background-color: rgb(127, 203, 247);
+      margin-bottom: .12rem;
+      text-align: center;
+      border: 1px solid rgb(0, 0, 0);
+      line-height: .3rem;
+      transform: skew(-15deg);
+      box-shadow: 3px 3px 5px rgb(7, 7, 7);
+    }
+
+    .additional_options>li>span:first-child {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      transform: skew(15deg);
+      font-size: 65%;
+      text-shadow: 1px 1px 2px rgb(175, 169, 169);
+    }
+
+    .additional_options>li>span:last-of-type {
+      /* display: block; */
+      position: absolute;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      font-size: 60%;
+      font-weight: 700;
+      text-align: right;
+      color: rgb(255, 255, 255);
+      text-shadow: 1px 1px 2px rgb(7, 7, 7);
+    }
+
+    .additional_options>li>div {
+      position: absolute;
+      z-index: 2;
+      overflow: hidden;
+      background-color: rgb(193, 252, 76);
+      transform: translate(100%, -0%);
+      top: -0.008333rem;
+      right: 0;
+      width: .5rem;
+      height: calc(100% + .016667rem);
+      font-size: 65%;
+      font-weight: 700;
+      text-align: right;
+      border: 1px solid rgb(0, 0, 0);
+      box-shadow: 3px 3px 5px rgb(7, 7, 7);
+    }
+
+    .basic_options {
+      padding: .25rem 0 .25rem 0;
+
+    }
+
+
+    .basic_options>li {
+      display: inline-block;
+      position: relative;
+      width: 45%;
+      z-index: 3;
+      background-color: rgb(107, 81, 255);
+      margin-bottom: .15rem;
+      /* margin-right: 5%; */
+      font-weight: 700;
+      text-align: center;
+      border: 1px solid rgb(0, 0, 0);
+      line-height: .3rem;
+      transform: skew(-15deg);
+      box-shadow: 3px 3px 5px rgb(7, 7, 7);
+    }
+
+    .basic_options>li:nth-of-type(even) {
+      left: 5%;
+    }
+
+    .personal_records {
+      padding: 0 0 .25rem 0;
+
+    }
+
+    .personal_records>li {
+      position: relative;
+      left: 50%;
+      transform: translate(-50%, -0%);
+      height: .25rem;
+      z-index: 3;
+      /* background-color: rgb(127, 203, 247); */
+      /* margin-bottom: .12rem; */
+      /* font-weight: 700; */
+      /* border: 1px solid rgb(0, 0, 0); */
+      line-height: .25rem;
+      /* transform: skew(-15deg); */
+      /* box-shadow: 3px 3px 5px rgb(7, 7, 7); */
+    }
+
+    .personal_records>li:first-child {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: rgb(248, 35, 248);
+      background-image: linear-gradient(-45deg, hsla(0, 0%, 100%, .1) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .1) 0, hsla(0, 0%, 100%, .1) 75%, transparent 0, transparent);
+      background-size: 7px 7px;
+      background-repeat: repeat;
+      animation: borderMove-data-v-081a28f6 .5s linear infinite;
+      box-shadow: .041667rem .041667rem rgb(7, 7, 7);
+      transform: translate(-50%, -0.025rem);
+    }
+
+    @keyframes borderMove-data-v-081a28f6 {
+      0% {
+        background-position: 0 0
+      }
+
+      to {
+        background-position: 7px 7px;
+      }
+    }
+
+    .personal_records>li>span:first-child {
+      /* display: inline-block; */
+      position: absolute;
+      z-index: 2;
+      width: .75rem;
+      /* transform: skew(15deg); */
+      font-size: 70%;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgb(175, 169, 169);
+    }
+
+    .personal_records>li>span:last-of-type {
+      /* display: block; */
+      position: absolute;
+      z-index: 3;
+      left: .75rem;
+      width: 1.25rem;
+      /* transform: translate(-50%, -50%); */
+      font-size: 70%;
+      text-align: center;
+      font-weight: 700;
+      color: rgb(255, 0, 0);
+      text-shadow: 1px 1px 2px rgb(7, 7, 7);
+    }
+
+    .shadow_test {
+      position: absolute;
+      width: 2.5rem;
+      height: 1.25rem;
+      top: 1.25rem;
+      left: 1.25rem;
+      background-color: rgb(117, 211, 255);
+      /* box-shadow: rgb(255, 255, 255) 10px 10px 20px 2px inset, rgb(59, 59, 59) 10px 10px 20px 2px; */
+    }
+
+    .shadow_test>div>span {
+      display: inline-block;
+      transform: matrix(1, 0, 0, 1, 0, 0);
+      color: black;
+      text-align: center;
+      /* animation: text_slide_down .15s forwards; */
+      transition: all .15s;
+    }
+
+    .shadow_test>div>span::after {
+      content: attr(data-letter);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      color: white;
+    }
+
+    .shadow_test>div:hover>span {
+      transform: translate(0%, -100%) matrix(1, 0, 0, 1, 0, 0);
+      /* animation: text_slide_up .15s forwards; */
+    }
+
+    @keyframes text_slide_up {
+      100% {
+        transform: translate(0%, -100%) matrix(1, 0, 0, 1, 0, 0);
+      }
+    }
+
+    /* 
+    @keyframes text_slide_down {
+      100% {
+        transform: translate(0, 0) matrix(1, 0, 0, 1, 0, 0);
+      }
+    } */
+    .star {
+      font-family: my_iconfont;
+      display: block;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 0.5rem;
+      height: 1.5rem;
+      background-color: cornsilk;
+    }
+
+    .star>span {
+      display: block;
+      position: relative;
+      width: .24rem;
+      height: .24rem;
+      color: transparent;
+      text-shadow: 0px 0px 0px transparent;
+
+    }
+
+    .star>span::before {
+      position: absolute;
+      left: 0;
+      z-index: 2;
+      /* text-shadow: 0px 0px 3px rgb(49, 49, 49), 1px 1px 6px rgb(255, 255, 255); */
+    }
+
+    .star>span::after {
+      position: absolute;
+      left: 0;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .star>.AP::before {
+      content: '';
+      color: rgba(172, 172, 172, 0.5);
+    }
+
+    .star>.AP::after {
+      content: '';
+      background-image: linear-gradient(135deg, rgb(208, 55, 255) 32%, rgb(248, 168, 255), rgb(148, 248, 240), rgb(40, 255, 136), rgb(157, 255, 0), rgb(226, 192, 0), rgb(255, 96, 96) 67%);
+      /* background-image: linear-gradient(135deg, rgb(255, 255, 255) 33%, rgb(255, 101, 204) 40%, rgb(255, 101, 204) 45%, rgb(255, 255, 255) 45%, rgb(255, 255, 255) 48%, rgb(255, 101, 204) 48%,rgb(0, 89, 255) 90%, rgb(0, 195, 255) 100%); */
+      /* background: linear-gradient(219deg, var(--color-1) 19%, transparent 19%,transparent 20%, var(--color-2) 20%, var(--color-2) 39%, transparent 39%,transparent 40%, var(--color-3) 40%,var(--color-3) 59% , transparent 59%,transparent 60%, var(--color-4) 60%, var(--color-4) 79%, transparent 79%, transparent 80%, var(--color-5) 80%); */
+    }
+
+    .star>.FC::before {
+      content: '';
+      color: rgba(219, 0, 146, .35);
+    }
+
+    .star>.FC::after {
+      content: '';
+      background-image: linear-gradient(135deg, rgb(255, 255, 255) 33%, rgb(255, 101, 204) 43%, rgb(255, 101, 204) 48%, rgb(255, 255, 255) 48%, rgb(255, 255, 255) 50%, rgb(255, 101, 204) 55%, rgb(255, 24, 178) 100%);
+      /* background: linear-gradient(219deg, var(--color-1) 19%, transparent 19%,transparent 20%, var(--color-2) 20%, var(--color-2) 39%, transparent 39%,transparent 40%, var(--color-3) 40%,var(--color-3) 59% , transparent 59%,transparent 60%, var(--color-4) 60%, var(--color-4) 79%, transparent 79%, transparent 80%, var(--color-5) 80%); */
+    }
+
+    .star>.GC::before {
+      content: '';
+      color: rgba(255, 145, 0, 0.35);
+    }
+
+    .star>.GC::after {
+      content: '';
+      background-image: linear-gradient(135deg, rgb(255, 247, 199) 33%, rgb(255, 217, 0) 43%, rgb(255, 217, 0) 48%, rgb(255, 247, 199) 48%, rgb(255, 247, 199) 50%, rgb(255, 217, 0) 57%, rgb(238, 164, 4)100%);
+      /* background-image: linear-gradient(135deg, rgb(255, 232, 101) 33%, rgb(255, 155, 24) 43%, rgb(255, 155, 24) 48%, rgb(255, 201, 101) 48%, rgb(255, 232, 101) 50%, rgb(255, 155, 24) 57%, rgb(238, 137, 4)100%); */
+      /* background: linear-gradient(219deg, var(--color-1) 19%, transparent 19%,transparent 20%, var(--color-2) 20%, var(--color-2) 39%, transparent 39%,transparent 40%, var(--color-3) 40%,var(--color-3) 59% , transparent 59%,transparent 60%, var(--color-4) 60%, var(--color-4) 79%, transparent 79%, transparent 80%, var(--color-5) 80%); */
+    }
+
+    .star>.ND::before {
+      content: '';
+      color: rgba(124, 124, 124, 0.35);
+    }
+
+    .star>.ND::after {
+      content: '';
+      background-image: linear-gradient(135deg, rgba(187, 187, 187, 0.5) 33%, rgba(105, 105, 105, 0.5)100%);
+      /* background: linear-gradient(219deg, var(--color-1) 19%, transparent 19%,transparent 20%, var(--color-2) 20%, var(--color-2) 39%, transparent 39%,transparent 40%, var(--color-3) 40%,var(--color-3) 59% , transparent 59%,transparent 60%, var(--color-4) 60%, var(--color-4) 79%, transparent 79%, transparent 80%, var(--color-5) 80%); */
+    }
+
+    .star>.no_game_date::before {
+      content: '';
+      color: rgba(124, 124, 124, 0.35);
+    }
+
+    .star>.no_game_date::after {
+      content: '';
+      /* background-image: linear-gradient(135deg, rgba(187, 187, 187, 0.5) 33%, rgba(105, 105, 105, 0.5)100%); */
+      /* background: linear-gradient(219deg, var(--color-1) 19%, transparent 19%,transparent 20%, var(--color-2) 20%, var(--color-2) 39%, transparent 39%,transparent 40%, var(--color-3) 40%,var(--color-3) 59% , transparent 59%,transparent 60%, var(--color-4) 60%, var(--color-4) 79%, transparent 79%, transparent 80%, var(--color-5) 80%); */
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal_overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: navajowhite;
+      opacity: .8;
+    }
+
+    .modal_body {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 6rem;
+      height: 4.5rem;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+
+</head>
+
+<body class="stage_transition" id="top">
+
+  <!-- <div class="modal">
+    <div class="modal_overlay"></div>
+    <div class="modal_body"></div>
+  </div> -->
+  <div class=""></div>
+
+  <div class="w">
+    <audio controls="controls" autoplay="autoplay" loop="loop" preload="auto" id="audio">
+      <source src="./music/Pastel＊Palettes - secret base ～君がくれたもの～.mp3" type="audio/mpeg">
+      <!-- <source src="./music/Afterglow - 午夜の待ち合わせ.mp3" type="audio/mpeg"> -->
+    </audio>
+    <div class="music_stage">
+      <div class="shadow_test">
+        <div class="transit_text">
+          <span data-letter="H">H</span><span data-letter="E">E</span><span data-letter="L">L</span><span
+            data-letter="L">L</span><span data-letter="O">O</span><span data-letter="W">W</span><span
+            data-letter="O">O</span><span data-letter="R">R</span><span data-letter="L">L</span><span
+            data-letter="D">D</span>
+        </div>
+      </div>
+      <div class="star" id="modal"><span class="AP"></span><span class="FC"></span><span class="GC"></span><span
+          class="ND"></span><span class="no_game_date"></span></div>
+      <!-- <div class="music_choice">
+        <div class="area_1"></div>
+        <div class="area_2"></div>
+        <div class="area_3"></div>
+      </div> -->
+      <div class="difficulty_choice">
+        <div class="area_4">
+          <ul class="basic_options">
+            <li><span>规则</span><span></span>
+              <div class="additional_list_item_1"></div>
+            </li>
+            <li><span>设定</span><span></span>
+              <div class="additional_list_item_4"></div>
+            </li>
+            <li><span>背景</span><span></span>
+              <div class="additional_list_item_2"></div>
+            </li>
+            <li><span>角色</span><span></span>
+              <div class="additional_list_item_3"></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="area_5">
+          <ul class="personal_records">
+            <li></li>
+            <!-- FULL COMBO!     GAME CLEAR!     -------- -->
+            <li><span>成就:</span><span>ALL PERFECT!</span>
+              <div class="additional_list_item_1"></div>
+            </li>
+            <li><span>最高分:</span><span>999999</span>
+              <div class="additional_list_item_2"></div>
+            </li>
+            <li><span>最大连击:</span><span>1896</span>
+              <div class="additional_list_item_3"></div>
+            </li>
+            <li><span>最多完美:</span><span>1896</span>
+              <div class="additional_list_item_4"></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="area_6">
+          <ul class="additional_options">
+            <li><span>判定稍微严格一些</span><span>cost+2%</span>
+              <div class="additional_list_item_1"></div>
+            </li>
+            <li><span>判定更加严格一些</span><span>cost+3%</span>
+              <div class="additional_list_item_2"></div>
+            </li>
+            <li><span>只有perfect才得分</span><span>cost+1%</span>
+              <div class="additional_list_item_3"></div>
+            </li>
+            <li><span>开始游戏后无音乐</span><span>cost+1%</span>
+              <div class="additional_list_item_4"></div>
+            </li>
+            <li><span>life为0也继续游戏</span><span>cost-1%</span>
+              <div class="additional_list_item_5"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="ll">dd</div>
+  <script>
+
+    let audio = new Audio();
+    audio.src = './music/ときめきポポロン♪.mp3';
+    audio.loop = false;
+    setTimeout(() => {
+    audio.preload = 'metadata';
+    audio.src = './music/ときめきポポロン♪.mp3';
+      
+    audio.addEventListener('loadedmetadata', () => {
+      console.log('11');
+      audio.currentTime = 2;
+      audio.play();
+    })
+    }, 1000);
+    let ll = document.getElementById('ll');
+    console.log(ll.innerHTML);
+    console.log(ll.innerText);
+    console.log(ll.textContent);
+  </script>
+</body>
+
+</html>

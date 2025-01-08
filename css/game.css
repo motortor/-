@@ -1,0 +1,87 @@
+@charset "UTF-8";
+.main {
+    position: absolute;
+    width: 8.75rem;
+    height: 4.916667rem;
+    /* background-color: blue; */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: .008333rem solid rgb(255, 17, 144, .6);
+}
+
+.main li {
+    position: absolute;
+    z-index: 2;
+    width: 1.25rem;
+    height: 100%;
+    /* background-color: pink; */
+    border: .008333rem solid rgb(255, 17, 144, .6);
+}
+
+.main li:nth-of-type(2) {
+    left: 1.25rem;
+}
+
+.main li:nth-of-type(3) {
+    left: 2.5rem;
+}
+
+.main li:nth-of-type(4) {
+    left: 3.75rem;
+}
+
+.main li:nth-of-type(5) {
+    left: 5rem;
+}
+
+.main li:nth-of-type(6) {
+    left: 6.25rem;
+}
+
+.main li:nth-of-type(7) {
+    left: 7.5rem;
+}
+
+div[class^=note] {
+    /* display: none; */
+    position: absolute;
+    z-index: 3;
+    width: 1.2rem;
+    height: .2rem;
+    top: .1rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div .note_note {
+    position: absolute;
+    background-color: deepskyblue;
+}
+
+div .note_flick {
+    position: absolute;
+    background-color: hotpink;
+}
+
+div .note_press {
+    position: absolute;
+    background-color: gold;
+}
+
+div .note_descend {
+    /* display: block; */
+    /* animation: descend 1s linear forwards; */
+    /* -webkit-animation: descend 1s linear forwards; */
+    transition: all 1s linear 0s;
+    top: 105%;
+}
+
+@keyframes descend {
+    0% {
+        top: 0%;
+    }
+    100% {
+        top: 105%;
+    }
+}

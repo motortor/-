@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,user-scalable=no, initial-scale=1.0,maximun-scale=1.0,minimun-scale=1.0">
+    <title>233</title>
+    <meta name="description" content="------------------" />
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/common.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/game.css">
+    <script src="./js/jquery.min.js"></script>
+    <!-- <script src="./js/index.js"></script> -->
+    <!-- <script src="./js/game.js"></script> -->
+    <script src="./js/gameConfig.js"></script>
+
+</head>
+
+<body class="" id="top">
+
+    <!-- <div class="modal">
+        <div class="modal_overlay"></div>
+        <div class="modal_body affirm">
+            <div class="modal_cross_sign"></div>
+            <h1>开始前</h1><br>
+            <p>1. 本游戏开始后正常而言会有<span style="color: red; font-size: inherit;">音乐播放</span>，请确保您处于<span
+                    style="color: red; font-size: inherit;">不会社死</span>的环境下。</p><br>
+            <p>2. 建议用火狐浏览器，测试用的Firefox 90.0.2，没有适配移动端，没做兼容性处理，其他浏览器在细节上会有差别。</p><br>
+            <p>3. 此网页的图片均来自于互联网，且经过压缩处理，本人不会写谱，音乐和谱面来自于邦邦。</p><br>
+            <p>4. 此网页仅供本人及同学学习＆交流使用，请不要上传到任何公共平台，否则引起的后果均与本人无关。</p>
+        </div>
+    </div>
+    <div class="stage_transition display_none"></div> -->
+
+    <div class="w">
+
+        <ul class="main display_none">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <script>
+        // #region
+
+        var additional = [true, false, false, false, true];//5个附加选项
+        var options = [0, 1, 0, 0, 0, 0];//[保留 占位没实际作用，难度，角色，背景，音符，轨道]
+        var name = ['secret base ~君がくれたもの~', '000', '222', '111', '333', '444'];
+        var achievement = [
+            [[0, 0, 0, 0], [1, 777, 12, 32], [1, 956, 99, 163], [2, 1965, 192, 169], [3, 6532, 623, 623]],
+            [[2, 5623, 369, 306], [0, 0, 0, 0], [1, 777, 12, 32], [2, 956, 99, 163], [3, 1965, 192, 169]],
+            [[3, 6532, 623, 623], [2, 5623, 369, 306], [0, 0, 0, 0], [1, 777, 12, 32], [1, 956, 99, 163]],
+            [[0, 0, 0, 0], [1, 777, 12, 32], [1, 956, 99, 163], [2, 1965, 192, 169], [3, 6532, 623, 623]],
+            [[2, 5623, 369, 306], [0, 0, 0, 0], [1, 777, 12, 32], [2, 956, 99, 163], [3, 1965, 192, 169]],
+            [[0, 0, 0, 0], [1, 777, 12, 32], [1, 956, 99, 163], [2, 1965, 192, 169], [3, 6532, 623, 623]],
+            [[2, 5623, 369, 306], [0, 0, 0, 0], [1, 777, 12, 32], [1, 956, 99, 163], [0, 1965, 192, 169]]
+        ];
+
+        let docEl = document.documentElement;
+        let w = document.querySelector('.w');
+        let noteSpeed = 1000;
+        let noteDetermine = 100;
+        let globalTimer1 = true;
+        let globalTimer2 = true;
+        let preload = false;
+        let audio = new Audio();
+        let SE = new Audio();
+        audio.loop = true;
+
+        // #endregion
+
+        document.documentElement.style.overflow = 'hidden';
+        class GameConfigLoader {
+            constructor(configData) {
+                this._configData = configData || loadGameConfig();
+                this._songName = [];
+                this._songRank = [];
+                this._songLink = [];
+                this._songCover = [];
+                this._songImage = [];
+                this._timeAxis = [];
+            }
+            // #region 读取基础音乐数据
+            loadConfigData() {
+                return this._configData;
+            }
+            loadSongMessage(songID) {
+                return this._configData[songID];
+            }
+            loadSongName(song) {
+                try {
+                    return song.songName;
+                } catch (e) {
+                    return '未定义名称';
+                }
+            }
+            loadSongRank(song) {
+                try {
+                    while (song.songRank.length < 5)
+                        song.songRank.push(null);
+                    song.songRank.length = 5;
+                    return song.songRank.map((elem) => {
+                        if (isNaN(elem + 0))
+                            return null;
+                        return elem;
+                    });
+                } catch (e) {
+                    return null;
+                }
+            }
+            loadSongLink(song) {
+                try {
+                    return song.songLink;
+                } catch (e) {
+                    return null;
+                }
+            }
+            loadSongCover(song) {
+                try {
+                    return song.songCover;
+                } catch (e) {
+                    return './images/null.jpg';
+                }
+            }
+            loadSongImage(song) {
+                try {
+                    return song.songImage;
+                } catch (e) {
+                    return './images/null.jpg';
+                }
+            }
+            loadAllSongName() {
+                return this._songName;
+            }
+            loadAllSongRank() {
+                return this._songRank
+            }
+            loadAllSongLink() {
+                return this._songLink;
+            }
+            loadAllSongCover() {
+                return this._songCover;
+            }
+            loadAllSongImage() {
+                return this._songImage;
+            }
+            loadAllSongNote(song) {
+                try {
+                    if (song.timeAxis.length < 5)
+                        song.timeAxis.length = 5;
+                    return song.timeAxis.filter((elem, index) => {
+                        if (index < 5) {
+                            try {
+                                return elem.filter((elem) => {
+                                    if (elem.noteType != 1 && elem.noteType != 2 && elem.noteType != 3)
+                                        elem.noteType = 1;
+                                    if ((elem.notePosition == 0 || elem.notePosition == 1 || elem.notePosition == 2 || elem.notePosition == 3 || elem.notePosition == 4 || elem.notePosition == 5 || elem.notePosition == 6) && !isNaN(elem.noteTime))
+                                        return elem;
+                                })
+                            } catch {
+                                return null;
+                            }
+                        }
+                    });
+                } catch (e) {
+                    return null;
+                }
+            }
+            loadSongNote(musicNow, hurdle) {
+                return this._timeAxis[musicNow][hurdle];
+            }
+            loadAll() {
+                if (this._configData.length < 3)
+                    return 1;
+                this._songName = this._configData.map(this.loadSongName, this);
+                this._songRank = this._configData.map(this.loadSongRank, this);
+                this._songLink = this._configData.map(this.loadSongLink, this);
+                this._songCover = this._configData.map(this.loadSongCover, this);
+                this._songImage = this._configData.map(this.loadSongImage, this);
+                this._songName.unshift('random');
+                this._songRank.unshift('?????');
+                this._songLink.unshift('');
+                this._songCover.unshift('./images/0.jpg');
+                this._songImage.unshift('./images/0.jpg');
+                this._timeAxis = this._configData.map(this.loadAllSongNote, this);
+                this._timeAxis.unshift([]);
+                console.log(this._timeAxis);
+                // console.log(this._songRank);
+            }
+            // #endregion
+            // #region 初始化音乐选择界面
+            audioStart(url) {
+                audio.pause();
+                audio.src = url;
+                if (audio.canPlayType('audio/wav')) {
+                    audio.currentTime = 2;
+                    audio.play();
+                }
+            }
+            resetAudio() {
+                this.audioStart(this._songLink[1]);
+            }
+            // #endregion
+        }
+        class SetScreenManager {
+            constructor() {
+                this._screenHeight = null;
+                this._screenWidth = null;
+            }
+            setScreen() {
+                this._screenHeight = window.innerHeight;
+                this._screenWidth = window.innerWidth;
+                document.body.style.height = w.style.height = this._screenHeight + 'px';
+                document.body.style.width = this._screenWidth + 'px';
+            }
+            pageshow(e) {
+                if (e.persisted) {
+                    this.setScreen();
+                }
+            }
+            responsiveSetScreen() {
+                this.setScreen();
+                window.addEventListener('resize', this.setScreen.bind(this));
+                window.addEventListener('pageshow', this.pageshow.bind(this))
+            }
+        }
+
+        class NoteMapSetInfo {
+            constructor(noteMap) {
+                this._noteMap = noteMap;
+                this._notePositionMap = [];
+                this._nowNote = [];
+                this._keyPressed = [];
+                this._keyRepeat = [];
+                this._keyTimer = [];
+                this._lis = null;
+                // this._audio = null;
+            }
+            // #region note演出与判定
+            showNoteAdd(noteType, notePosition, noteID) {
+                switch (noteType) {
+                    case 2:
+                        this._lis[notePosition].insertAdjacentHTML('afterbegin', '<div class="note_flick visibility_hidden" id="note_' + noteID + '"></div>');
+                        break;
+                    case 3:
+                        this._lis[notePosition].insertAdjacentHTML('afterbegin', '<div class="note_press visibility_hidden" id="note_' + noteID + '"></div>');
+                        break;
+                    default:
+                        this._lis[notePosition].insertAdjacentHTML('afterbegin', '<div class="note_note visibility_hidden" id="note_' + noteID + '"></div>');
+                }
+            }
+            showNoteDescend(noteID) {
+                document.getElementById('note_' + noteID).classList.remove('visibility_hidden');
+                document.getElementById('note_' + noteID).classList.add('note_descend');
+            }
+            showNote(note, noteID) {
+                this.showNoteAdd(note.noteType, note.notePosition, noteID);
+                setTimeout(this.showNoteDescend, note.noteTime - noteSpeed, noteID);
+            }
+            noteCodeToPosition(code) {
+                switch (code) {
+                    case 88:
+                        return 0;
+                    case 67:
+                        return 1;
+                    case 86:
+                        return 2;
+                    case 66:
+                        return 3;
+                    case 78:
+                        return 4;
+                    case 77:
+                        return 5;
+                    case 188:
+                        return 6;
+                    case 32:
+                        return 7;
+                    default:
+                        return 8;
+                }
+            }
+            noteDoubleKeyDown() {
+                document.addEventListener("keyup", (e) => {
+                    e.stopImmediatePropagation();
+                    this._keyPressed[this.noteCodeToPosition(e.keyCode)] = false;
+                    this._keyRepeat[this.noteCodeToPosition(e.keyCode)] = false;
+                });
+                document.addEventListener("keydown", (e) => {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    this._keyPressed[this.noteCodeToPosition(e.keyCode)] = true;
+                    if (e.repeat)
+                        this._keyRepeat[this.noteCodeToPosition(e.keyCode)] = true;
+                    if (!this._keyRepeat[this.noteCodeToPosition(e.keyCode)] && !this._keyTimer[this.noteCodeToPosition(e.keyCode)])
+                        this._keyTimer[this.noteCodeToPosition(e.keyCode)] = setTimeout(() => {
+                            if (this._keyPressed[this.noteCodeToPosition(e.keyCode)])
+                                this._keyRepeat[this.noteCodeToPosition(e.keyCode)] = true;
+                            this._keyTimer[this.noteCodeToPosition(e.keyCode)] = 0;
+                        }, 250);
+                });
+            }
+            noteNoteGreat(note) {
+                if (this._keyPressed[note.notePosition] && !this._keyRepeat[note.notePosition] && !this._keyRepeat[7]) {
+                    this._keyPressed[note.notePosition] = false;
+                    clearTimeout(note.timer2);
+                    clearTimeout(note.timer3);
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop1);
+                    console.log(note.noteID);
+                    console.log('great1');
+                }
+            }
+            noteNotePerfect(note) {
+                if (this._keyPressed[note.notePosition] && !this._keyRepeat[note.notePosition] && !this._keyRepeat[7]) {
+                    this._keyPressed[note.notePosition] = false;
+                    clearTimeout(note.timer3);
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop2);
+                    console.log(note.noteID);
+                    console.log('perfect');
+                }
+            }
+            noteNoteGreat2(note) {
+                if (this._keyPressed[note.notePosition] && !this._keyRepeat[note.notePosition] && !this._keyRepeat[7]) {
+                    this._keyPressed[note.notePosition] = false;
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop3);
+                    console.log(note.noteID);
+                    console.log('great2');
+                }
+            }
+            noteNoteMiss(note) {
+                console.log(note.noteID);
+                console.log('miss');
+            }
+            noteNoteGreatTime(note) {
+                note.timerLoop1 = setInterval(this.noteNoteGreat.bind(this, note), 10)
+            }
+            noteNotePerfectTime(note) {
+                clearInterval(note.timerLoop1);
+                note.timerLoop2 = setInterval(this.noteNotePerfect.bind(this, note), 10)
+            }
+            noteNoteGreatTime2(note) {
+                clearInterval(note.timerLoop2);
+                note.timerLoop3 = setInterval(this.noteNoteGreat2.bind(this, note), 10)
+            }
+            noteNoteMissTime(note) {
+                clearInterval(note.timerLoop3);
+                this.noteNoteMiss(note);
+            }
+            noteNoteJudge(note) {
+                note.timer1 = setTimeout(this.noteNoteGreatTime.bind(this), note.noteTime - noteDetermine * 2, note);
+                note.timer2 = setTimeout(this.noteNotePerfectTime.bind(this), note.noteTime - noteDetermine, note);
+                note.timer3 = setTimeout(this.noteNoteGreatTime2.bind(this), note.noteTime + noteDetermine, note);
+                note.timer4 = setTimeout(this.noteNoteMissTime.bind(this), note.noteTime + noteDetermine * 2, note);
+            }
+            notePressPerfect(note) {
+                if (this._keyPressed[note.notePosition]) {
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop2);
+                    console.log(note.noteID);
+                    console.log('perfect');
+                }
+            }
+            notePressMiss(note) {
+                console.log(note.noteID);
+                console.log('miss');
+            }
+            notePressPerfectTime(note) {
+                note.timerLoop2 = setInterval(this.notePressPerfect.bind(this, note), 10)
+            }
+            notePressMissTime(note) {
+                clearInterval(note.timerLoop2);
+                this.noteNoteMiss(note);
+            }
+            notePressJudge(note) {
+                note.timer2 = setTimeout(this.notePressPerfectTime.bind(this), note.noteTime - noteDetermine, note);
+                note.timer4 = setTimeout(this.notePressMissTime.bind(this), note.noteTime + noteDetermine, note);
+            }
+            noteFlickGreat(note) {
+                if (this._keyPressed[note.notePosition] && !this._keyRepeat[note.notePosition] && this._keyPressed[7]) {
+                    this._keyPressed[note.notePosition] = false;
+                    clearTimeout(note.timer2);
+                    clearTimeout(note.timer3);
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop1);
+                    console.log(note.noteID);
+                    console.log('great1');
+                }
+            }
+            noteFlickPerfect(note) {
+                if (this._keyPressed[note.notePosition] && !this._keyRepeat[note.notePosition] && this._keyRepeat[7]) {
+                    this._keyPressed[note.notePosition] = false;
+                    clearTimeout(note.timer3);
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop2);
+                    console.log(note.noteID);
+                    console.log('perfect');
+                }
+            }
+            noteFlickGreat2(note) {
+                if (this._keyPressed[note.notePosition] && !this._keyRepeat[note.notePosition] && this._keyRepeat[7]) {
+                    this._keyPressed[note.notePosition] = false;
+                    clearTimeout(note.timer4);
+                    clearInterval(note.timerLoop3);
+                    console.log(note.noteID);
+                    console.log('great2');
+                }
+            }
+            noteFlickMiss(note) {
+                console.log(note.noteID);
+                console.log('miss');
+            }
+            noteFlickGreatTime(note) {
+                note.timerLoop1 = setInterval(this.noteFlickGreat.bind(this, note), 10)
+            }
+            noteFlickPerfectTime(note) {
+                clearInterval(note.timerLoop1);
+                note.timerLoop2 = setInterval(this.noteFlickPerfect.bind(this, note), 10)
+            }
+            noteFlickGreatTime2(note) {
+                clearInterval(note.timerLoop2);
+                note.timerLoop3 = setInterval(this.noteFlickGreat2.bind(this, note), 10)
+            }
+            noteFlickMissTime(note) {
+                clearInterval(note.timerLoop3);
+                this.noteNoteMiss(note);
+            }
+            noteFlickJudge(note) {
+                note.timer1 = setTimeout(this.noteFlickGreatTime.bind(this), note.noteTime - noteDetermine * 2, note);
+                note.timer2 = setTimeout(this.noteFlickPerfectTime.bind(this), note.noteTime - noteDetermine, note);
+                note.timer3 = setTimeout(this.noteFlickGreatTime2.bind(this), note.noteTime + noteDetermine, note);
+                note.timer4 = setTimeout(this.noteFlickMissTime.bind(this), note.noteTime + noteDetermine * 2, note);
+            }
+            noteJudge(notePositionAxis, index) {
+                // let noteExample = document.getElementById('note_' + notePositionAxis[index].noteID);
+                switch (notePositionAxis[index].noteType) {
+                    case 2:
+                        this.noteFlickJudge(notePositionAxis[index]);
+                        break;
+                    case 3:
+                        this.notePressJudge(notePositionAxis[index]);
+                        break;
+                    default:
+                        this.noteNoteJudge(notePositionAxis[index]);
+                }
+                if (++index < notePositionAxis.length)
+                    this.noteJudge(notePositionAxis, index);
+
+            }
+            notePositionJudge(notePositionAxis) {
+                if (notePositionAxis.length)
+                    this.noteJudge(notePositionAxis, 0);
+            }
+            noteAllJudge() {
+                for (let i = 0; i < 7; i++) {
+                    this._notePositionMap[i] = this._noteMap.filter((elem, index) => {
+                        if (elem.notePosition == i) {
+                            elem.noteID = index;
+                            return elem;
+                        }
+                    })
+                }
+                console.log(this._notePositionMap);
+                console.log(this._noteMap);
+                this._notePositionMap.forEach(this.notePositionJudge, this);
+            }
+            // #endregion
+            stageShow() {
+                // this._audio = new Audio();
+                let top = document.getElementById('top');
+                top.classList.add('stage_transition');
+                setTimeout(() => {
+                    document.querySelector('.main').classList.remove('display_none');
+                    this._lis = document.querySelectorAll('.main li');
+                    setTimeout(() => {
+                        top.classList.remove('stage_transition');
+                        let timer = setInterval(() => {
+                            if (preload) {
+                                preload = false;
+                                clearTimeout(timer);
+                                audio.play();
+                                this._noteMap.forEach(this.showNote, this);
+                                this.noteDoubleKeyDown();
+                                this.noteAllJudge();
+                            }
+                        }, 250);
+                    }, 3000);
+                }, 3000);
+            }
+        }
+
+        let $setScreenManager = new SetScreenManager();
+        $setScreenManager.responsiveSetScreen();
+        let $gameConfigLoader = new GameConfigLoader();
+        if ($gameConfigLoader.loadAll()) {
+            console.log('err');
+        }
+
+        audio.pause();
+        audio.src = './music/secret base ～君がくれたもの～.mp3';
+        audio.preload = 'metadata';
+        audio.loop = false;
+        audio.currentTime = 0;
+        audio.addEventListener('loadedmetadata', () => {
+            preload = true;
+        })
+        let $noteMapSetting = new NoteMapSetInfo($gameConfigLoader.loadSongNote(3, 0));
+        // console.log($gameConfigLoader);
+        $noteMapSetting.stageShow();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,user-scalable=no, initial-scale=1.0,maximun-scale=1.0,minimun-scale=1.0">
+  <title>222</title>
+  <meta name="description" content="------------------" />
+  <meta name="keywords" content="">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="./css/reset.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/fullpage.css"> -->
+  <link rel="stylesheet" type="text/css" href="./css/common.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/sss.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./css/index.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./css/game.css"> -->
+  <script src="./js/jquery.min.js"></script>
+  <!-- <script src="./js/fullpage.js"></script> -->
+  <!-- <script src="./js/index.js"></script> -->
+  <!-- <script src="./js/game.js"></script> -->
+  <!-- <script src="./js/gameConfig.js"></script> -->
+  <style>
+    .w {
+      height: 900px;
+    }
+
+    .music_stage {
+      position: absolute;
+      width: 8rem;
+      height: 6rem;
+      /* background-color: aqua; */
+      left: 46%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .music_choice {
+      position: absolute;
+      width: 6rem;
+      height: 6rem;
+      /* background-color: rgb(0, 255, 136); */
+      perspective: 15rem;
+      transform-style: preserve-3d;
+    }
+
+    .difficulty_choice {
+      position: absolute;
+      left: 6rem;
+      width: 2rem;
+      height: 6rem;
+      /* background-color: rgb(247, 0, 255); */
+      perspective: 15rem;
+      perspective-origin: -3rem 3rem;
+      transform-style: preserve-3d;
+    }
+
+    .area_1 {
+      position: absolute;
+      top: 1.75rem;
+      left: .5rem;
+      width: 5rem;
+      height: 2.5rem;
+      background-image: url(./upload/01\ \(3\).jpg);
+      background-size: cover;
+      backface-visibility: hidden;
+      transform-origin: 2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, -60deg);
+      transition: all 1s;
+    }
+
+    /* .area_1:hover {
+      transform: rotate3d(1, 0, 0, -120deg);
+    } */
+
+    .area_1:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    }
+
+    .area_2 {
+      position: absolute;
+      top: 1.75rem;
+      left: .5rem;
+      width: 5rem;
+      height: 2.5rem;
+      background-image: url(./upload/01\ \(2\).jpg);
+      background-size: cover;
+      backface-visibility: hidden;
+      transform-origin: 2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 0deg);
+      transition: all 1s;
+    }
+
+    /* .area_2:hover {
+      transform: rotate3d(1, 0, 0, -60deg);
+    } */
+
+    .area_2:hover {
+      transform: rotate3d(1, 0, 0, 60deg);
+    }
+
+    .area_3 {
+      position: absolute;
+      top: 1.75rem;
+      left: .5rem;
+      width: 5rem;
+      height: 2.5rem;
+      background-image: url(./upload/01\ \(1\).jpg);
+      background-size: cover;
+      backface-visibility: hidden;
+      transform-origin: 2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 60deg);
+      transition: all 1s;
+    }
+
+    /* .area_3:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    } */
+
+    .area_3:hover {
+      transform: rotate3d(1, 0, 0, 120deg);
+    }
+
+    .area_4 {
+      position: absolute;
+      top: 1.75rem;
+      left: -.25rem;
+      width: 2rem;
+      height: 2.5rem;
+      background-color: rgba(193, 252, 76, .5);
+      backface-visibility: hidden;
+      transform-origin: -2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, -60deg);
+      transition: all 1s;
+    }
+
+    .area_4:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    }
+
+    .area_5 {
+      position: absolute;
+      top: 1.75rem;
+      left: -.25rem;
+      width: 2rem;
+      height: 2.5rem;
+      /* background-image: url(./upload/01\ \(1\).jpg);
+      background-size: cover; */
+      /* background-color: cornflowerblue; */
+      backface-visibility: hidden;
+      transform-origin: -2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 0deg);
+      transition: all 1s;
+    }
+
+    .area_5:hover {
+      transform: rotate3d(1, 0, 0, -60deg);
+    }
+
+    /* .area_5:hover {
+      transform: rotate3d(1, 0, 0, 60deg);
+    } */
+
+    .area_6 {
+      position: absolute;
+      top: 1.75rem;
+      left: -.25rem;
+      width: 2rem;
+      height: 2.5rem;
+      /* background-color: rgba(76, 252, 237, 0.5); */
+      backface-visibility: hidden;
+      transform-origin: -2.5rem 1.25rem 2.165063509461rem;
+      transform: rotate3d(1, 0, 0, 60deg);
+      transition: all 1s;
+    }
+
+    /* .area_6:hover {
+      transform: rotate3d(1, 0, 0, 0deg);
+    } */
+
+    .area_6:hover {
+      transform: rotate3d(1, 0, 0, 120deg);
+    }
+
+    .additional_options {
+      padding: .25rem .5rem .25rem 0;
+
+    }
+
+    .additional_options>li {
+      position: relative;
+      z-index: 3;
+      background-color: rgb(127, 203, 247);
+      margin-bottom: .12rem;
+      text-align: center;
+      border: 1px solid rgb(0, 0, 0);
+      line-height: .3rem;
+      transform: skew(-15deg);
+      box-shadow: 3px 3px 5px rgb(7, 7, 7);
+    }
+
+    .additional_options>li>span:first-child {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      transform: skew(15deg);
+      font-size: 65%;
+      text-shadow: 1px 1px 2px rgb(175, 169, 169);
+    }
+
+    .additional_options>li>span:last-of-type {
+      /* display: block; */
+      position: absolute;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      font-size: 60%;
+      font-weight: 700;
+      text-align: right;
+      color: rgb(255, 255, 255);
+      text-shadow: 1px 1px 2px rgb(7, 7, 7);
+    }
+
+    .additional_options>li>div {
+      position: absolute;
+      z-index: 2;
+      overflow: hidden;
+      background-color: rgb(193, 252, 76);
+      transform: translate(100%, -0%);
+      top: -0.008333rem;
+      right: 0;
+      width: .5rem;
+      height: calc(100% + .016667rem);
+      font-size: 65%;
+      font-weight: 700;
+      text-align: right;
+      border: 1px solid rgb(0, 0, 0);
+      box-shadow: 3px 3px 5px rgb(7, 7, 7);
+    }
+
+    .basic_options {
+      padding: .25rem 0 .25rem 0;
+
+    }
+
+
+    .basic_options>li {
+      display: inline-block;
+      position: relative;
+      width: 45%;
+      z-index: 3;
+      background-color: rgb(107, 81, 255);
+      margin-bottom: .15rem;
+      /* margin-right: 5%; */
+      font-weight: 700;
+      text-align: center;
+      border: 1px solid rgb(0, 0, 0);
+      line-height: .3rem;
+      transform: skew(-15deg);
+      box-shadow: 3px 3px 5px rgb(7, 7, 7);
+    }
+
+    .basic_options>li:nth-of-type(even) {
+      left: 5%;
+    }
+
+    .personal_records {
+      padding: 0 0 .25rem 0;
+
+    }
+
+    .personal_records>li {
+      position: relative;
+      left: 50%;
+      transform: translate(-50%, -0%);
+      height: .25rem;
+      z-index: 3;
+      /* background-color: rgb(127, 203, 247); */
+      /* margin-bottom: .12rem; */
+      /* font-weight: 700; */
+      /* border: 1px solid rgb(0, 0, 0); */
+      line-height: .25rem;
+      /* transform: skew(-15deg); */
+      /* box-shadow: 3px 3px 5px rgb(7, 7, 7); */
+    }
+
+    .personal_records>li:first-child {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: rgb(248, 35, 248);
+      background-image: linear-gradient(-45deg, hsla(0, 0%, 100%, .1) 25%, transparent 0, transparent 50%, hsla(0, 0%, 100%, .1) 0, hsla(0, 0%, 100%, .1) 75%, transparent 0, transparent);
+      background-size: 7px 7px;
+      background-repeat: repeat;
+      animation: borderMove-data-v-081a28f6 .5s linear infinite;
+      box-shadow: .041667rem .041667rem rgb(7, 7, 7);
+      transform: translate(-50%, -0.025rem);
+    }
+
+    @keyframes borderMove-data-v-081a28f6 {
+      0% {
+        background-position: 0 0
+      }
+
+      to {
+        background-position: 7px 7px;
+      }
+    }
+
+    .personal_records>li>span:first-child {
+      /* display: inline-block; */
+      position: absolute;
+      z-index: 2;
+      width: .75rem;
+      /* transform: skew(15deg); */
+      font-size: 70%;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgb(175, 169, 169);
+    }
+
+    .personal_records>li>span:last-of-type {
+      /* display: block; */
+      position: absolute;
+      z-index: 3;
+      left: .75rem;
+      width: 1.25rem;
+      /* transform: translate(-50%, -50%); */
+      font-size: 70%;
+      text-align: center;
+      font-weight: 700;
+      color: rgb(255, 0, 0);
+      text-shadow: 1px 1px 2px rgb(7, 7, 7);
+    }
+
+    .rrr {
+      position: absolute;
+      width: 2.5rem;
+      height: 1.25rem;
+      top: 1.25rem;
+      left: 1.25rem;
+      background-color: rgb(255, 117, 158);
+      transform: translate(-50%, -50%) scale(1);
+      /* box-shadow: rgb(255, 255, 255) 10px 10px 20px 2px inset, rgb(59, 59, 59) 10px 10px 20px 2px; */
+    }
+
+    .nnn {
+      transition: all .5s;
+      width: 4rem;
+      opacity: 0;
+      transform: translate(-50%, 0%) scale(1);
+    }
+  </style>
+
+</head>
+
+<body class="" id="top">
+
+  <!-- <div class="modal">
+    <div class="modal_overlay"></div>
+    <div class="modal_body"></div>
+  </div> -->
+  <div class=""></div>
+
+  <div class="w">
+    <div class="music_stage">
+      <div class="rrr">
+      </div>
+      <div class="star" id="modal"><span class="AP"></span><span class="FC"></span><span class="GC"></span><span
+          class="ND"></span><span class="no_game_date"></span></div>
+      <!-- <div class="music_choice">
+        <div class="area_1"></div>
+        <div class="area_2"></div>
+        <div class="area_3"></div>
+      </div> -->
+      <div class="difficulty_choice">
+        <div class="area_4">
+          <ul class="basic_options">
+            <li><span>规则</span><span></span>
+              <div class="additional_list_item_1"></div>
+            </li>
+            <li><span>设定</span><span></span>
+              <div class="additional_list_item_4"></div>
+            </li>
+            <li><span>背景</span><span></span>
+              <div class="additional_list_item_2"></div>
+            </li>
+            <li><span>角色</span><span></span>
+              <div class="additional_list_item_3"></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="area_5">
+          <ul class="personal_records">
+            <li></li>
+            <!-- FULL COMBO!     GAME CLEAR!     -------- -->
+            <li><span>成就:</span><span>ALL PERFECT!</span>
+              <div class="additional_list_item_1"></div>
+            </li>
+            <li><span>最高分:</span><span>999999</span>
+              <div class="additional_list_item_2"></div>
+            </li>
+            <li><span>最大连击:</span><span>1896</span>
+              <div class="additional_list_item_3"></div>
+            </li>
+            <li><span>最多完美:</span><span>1896</span>
+              <div class="additional_list_item_4"></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="area_6">
+          <ul class="additional_options">
+            <li><span>判定稍微严格一些</span><span>cost+2%</span>
+              <div class="additional_list_item_1"></div>
+            </li>
+            <li><span>判定更加严格一些</span><span>cost+3%</span>
+              <div class="additional_list_item_2"></div>
+            </li>
+            <li><span>只有perfect才得分</span><span>cost+1%</span>
+              <div class="additional_list_item_3"></div>
+            </li>
+            <li><span>开始游戏后无音乐</span><span>cost+1%</span>
+              <div class="additional_list_item_4"></div>
+            </li>
+            <li><span>life为0也继续游戏</span><span>cost-1%</span>
+              <div class="additional_list_item_5"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var rrr = document.querySelector('.rrr');
+    rrr.addEventListener('click', () => {
+      console.log('111');
+      // rrr.style.width = "4rem";
+      rrr.classList.add('nnn')
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0px solid red;
+    font-size: .24rem;
+}
+
+html {
+    font-size: 120px;
+    font-family: \5FAE\8F6F\96C5\9ED1, \9ED1\4F53, \5B8B\4F53;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+}
+
+a,
+input,
+img {
+    vertical-align: middle;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+    display: block;
+}
+
+audio,
+video {
+    display: inline-block;
+}
+
+
+/* 表格 */
+
+table {
+    border-collapse: collapse;
+    /* 列宽相同 */
+    table-layout: fixed;
+}
+
+tr,
+td,
+th {
+    vertical-align: top;
+    text-align: center;
+    border: 1px solid black;
+}
+
+
+/* 列表 */
+
+ul,
+ol {
+    list-style-type: none;
+}
+
+
+/* 表单 */
+
+input,
+button {
+    outline: none;
+    /* 取消轮廓边框 */
+    overflow: visible;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+input:focus {
+    /* 获得焦点的表单 */
+    background-color: white;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: indigo;
+}
+
+a:hover {
+    color: navy;
+    outline: none;
+}
+
+a:active {
+    color: cadetblue;
+    outline: none;
+}
